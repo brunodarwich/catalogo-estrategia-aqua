@@ -1,0 +1,195 @@
+{
+  "categories": [
+    {
+      "id": "colonias",
+      "name": "Colônias Pós-Banho",
+      "description": "Perfumação pessoal leve e rituais de autocuidado."
+    },
+    {
+      "id": "automotivo",
+      "name": "Aromatizador Automotivo",
+      "description": "Fragrâncias para veículos com foco em fixação e frescor."
+    },
+    {
+      "id": "tecidos",
+      "name": "Água para Tecidos",
+      "description": "Cuidados com a casa: lençóis, roupas e cortinas."
+    },
+    {
+      "id": "bruma",
+      "name": "Bruma Capilar",
+      "description": "Perfumação para cabelos com ativos de tratamento, sem álcool."
+    }
+  ],
+  "products": [
+    {
+      "sku": 1225,
+      "name": "Atena",
+      "categoryId": "colonias",
+      "size": "100ml",
+      "price": 130.00,
+      "inspiration": "La Vie Est Belle",
+      "notes": "Íris Pallida protagonista, floral adocicado.",
+      "images": ["https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1226,
+      "name": "Jade",
+      "categoryId": "colonias",
+      "size": "100ml",
+      "price": 130.00,
+      "inspiration": "J'adore",
+      "notes": "Elegância e luxo em buquê floral.",
+      "images": ["/products/jade.jpg"]
+    },
+    {
+      "sku": 1227,
+      "name": "Atma Shanti",
+      "categoryId": "colonias",
+      "size": "100ml",
+      "price": 130.00,
+      "inspiration": "Cítrica suave",
+      "notes": "Frescor e tranquilidade com notas cítricas leves.",
+      "images": ["https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1228,
+      "name": "Blu",
+      "categoryId": "colonias",
+      "size": "100ml",
+      "price": 130.00,
+      "inspiration": "Blue Label",
+      "notes": "Refrescante e marcante, ideal para o dia a dia.",
+      "images": ["https://images.unsplash.com/photo-1557170334-a9632e77c6e4?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1229,
+      "name": "Nabeel",
+      "categoryId": "colonias",
+      "size": "100ml",
+      "price": 130.00,
+      "inspiration": "Legend",
+      "notes": "Toque ambarado, perfeito para a rotina urbana.",
+      "images": ["https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1230,
+      "name": "Gold",
+      "categoryId": "colonias",
+      "size": "100ml",
+      "price": 130.00,
+      "inspiration": "One Million",
+      "notes": "Amadeirada e marcante, para homens de personalidade.",
+      "images": ["https://images.unsplash.com/photo-1583445013765-48c2201c8141?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1231,
+      "name": "Malik",
+      "categoryId": "colonias",
+      "size": "100ml",
+      "price": 130.00,
+      "inspiration": "Sauvage Elixir",
+      "notes": "Linha árabe, força do deserto e especiarias.",
+      "images": ["https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1331,
+      "name": "Marine",
+      "categoryId": "automotivo",
+      "size": "62ml",
+      "price": 46.00,
+      "notes": "Frescor oceânico e limpeza imediata.",
+      "images": ["https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1332,
+      "name": "Velvet Drive",
+      "categoryId": "automotivo",
+      "size": "62ml",
+      "price": 46.00,
+      "notes": "Toque aveludado e fixação prolongada para seu carro.",
+      "images": ["https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1333,
+      "name": "Executive",
+      "categoryId": "automotivo",
+      "size": "62ml",
+      "price": 46.00,
+      "notes": "Fragrância sofisticada e marcante, ambiente profissional.",
+      "images": ["https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1334,
+      "name": "Spirit Silver",
+      "categoryId": "automotivo",
+      "size": "62ml",
+      "price": 46.00,
+      "notes": "Frescor metálico e energia para suas viagens.",
+      "images": ["https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1434,
+      "name": "Cítrico Floral",
+      "categoryId": "tecidos",
+      "size": "280ml",
+      "price": 55.00,
+      "notes": "Sensação de limpeza e frescor equilibrado para tecidos.",
+      "images": ["https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1435,
+      "name": "Capim Limão",
+      "categoryId": "tecidos",
+      "size": "280ml",
+      "price": 55.00,
+      "notes": "Revitalização e frescor duradouro para seu lar.",
+      "images": ["https://images.unsplash.com/photo-1559181567-c3190cb9959b?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1436,
+      "name": "Erva Doce",
+      "categoryId": "tecidos",
+      "size": "280ml",
+      "price": 55.00,
+      "notes": "Leveza, bem-estar e calma em cada borrifada.",
+      "images": ["https://images.unsplash.com/photo-1515002246390-7bf7a8a47b2f?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1437,
+      "name": "Mirra",
+      "categoryId": "tecidos",
+      "size": "280ml",
+      "price": 55.00,
+      "notes": "Sofisticado, levemente amadeirado e quente.",
+      "images": ["https://images.unsplash.com/photo-1602928321679-560bb453f190?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1438,
+      "name": "Lavanda",
+      "categoryId": "tecidos",
+      "size": "280ml",
+      "price": 55.00,
+      "notes": "Suavidade, descanso e tranquilidade para o lar.",
+      "images": ["https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1538,
+      "name": "Liz",
+      "categoryId": "bruma",
+      "size": "50ml",
+      "price": 55.00,
+      "notes": "Floral com fundo ambarado. Ativos: Alecrim e Jaborandi.",
+      "images": ["https://images.unsplash.com/photo-1608528577891-eb055944f2e7?auto=format&fit=crop&q=80&w=800"]
+    },
+    {
+      "sku": 1539,
+      "name": "Blu",
+      "categoryId": "bruma",
+      "size": "50ml",
+      "price": 55.00,
+      "notes": "Maciez, brilho e frescor para cabelos masculinos.",
+      "images": ["https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=800"]
+    }
+  ]
+}

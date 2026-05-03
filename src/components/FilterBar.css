@@ -1,0 +1,62 @@
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-bg-main);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(75, 54, 33, 0.1);
+  margin-bottom: 2rem;
+}
+
+.filter-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.filter-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.filter-item {
+  white-space: nowrap;
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  color: var(--color-primary);
+  opacity: 0.6;
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  transition: all var(--transition-smooth);
+}
+
+.filter-item:hover {
+  opacity: 1;
+  background-color: var(--color-bg-alt);
+}
+
+.filter-item.active {
+  opacity: 1;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(75, 54, 33, 0.2);
+}
+
+@media (max-width: 768px) {
+  .filter-bar {
+    padding: 1rem 0;
+  }
+  .filter-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}

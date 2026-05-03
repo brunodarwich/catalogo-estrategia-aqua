@@ -1,0 +1,28 @@
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-gap);
+  padding: 1rem 0 4rem;
+}
+
+.product-grid-empty {
+  text-align: center;
+  padding: 8rem 0;
+  opacity: 0.5;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+/* Responsividade do Grid */
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

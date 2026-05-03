@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+  /* Cores - Quiet Luxury */
+  --color-primary: #4B3621;   /* Marrom Cafezal */
+  --color-bg-main: #FFFDD0;   /* Creme Suave */
+  --color-bg-alt: #F5F5DC;    /* Bege Clássico */
+  --color-accent: #D4AF37;    /* Ouro Velho */
+  --color-text: #6F4E37;      /* Texto Secundário */
+  --color-white: #FAF9F6;     /* Off-White */
+  
+  /* Tipografia */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+  
+  /* Espaçamento */
+  --spacing-gap: 1.5rem;
+  --container-padding: 1.25rem;
+  
+  /* Transições */
+  --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-main);
+  color: var(--color-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: var(--transition-smooth);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Utilitários de Animação */
+.fade-in {
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+
+/* Thumb Zone - Mobile First */
+@media (max-width: 768px) {
+  :root {
+    --spacing-gap: 1rem;
+    --container-padding: 1rem;
+  }
+}
