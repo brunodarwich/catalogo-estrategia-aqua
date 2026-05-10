@@ -1,28 +1,25 @@
 import { X, MessageCircle } from 'lucide-react';
+import { getProductPrimaryImage } from '../data/catalog';
 import { generateWhatsAppLink } from '../utils/whatsapp';
+import ProductPrice from './ProductPrice';
 import './ProductModal.css';
 
 const ProductModal = ({ product, onClose }) => {
   if (!product) return null;
 
-  // Formatação de preço
-  const formattedPrice = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(product.price);
-
   const whatsappLink = generateWhatsAppLink(product);
+  const primaryImage = getProductPrimaryImage(product);
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>
+        <button type="button" className="modal-close" onClick={onClose} aria-label="Fechar detalhes do produto">
           <X size={24} strokeWidth={1} />
         </button>
         
         <div className="modal-body">
           <div className="modal-image-container">
-            <img src={product.images[0]} alt={product.name} className="modal-image" />
+            <img src={primaryImage} alt={product.name} className="modal-image" />
           </div>
           
           <div className="modal-info">
@@ -31,27 +28,30 @@ const ProductModal = ({ product, onClose }) => {
             
             <div className="modal-details">
               <div className="detail-item">
-                <span className="detail-label">Tamanho:</span>
-                <span className="detail-value">{product.size}</span>
+                <span className="detail-label">Volume:</span>
+                <span className="detail-value">{product.volume}</span>
               </div>
-              {product.inspiration && (
+              {product.fragrance && (
                 <div className="detail-item">
-                  <span className="detail-label">Inspiração:</span>
-                  <span className="detail-value">{product.inspiration}</span>
+                  <span className="detail-label">Fragrância:</span>
+                  <span className="detail-value">{product.fragrance}</span>
                 </div>
               )}
             </div>
 
             <div className="modal-description">
-              <h3>Notas Olfativas</h3>
-              <p>{product.notes}</p>
+              <h3>Descricao</h3>
+              <p>{product.description}</p>
             </div>
 
             <div className="modal-footer">
-              <div className="modal-price-container">
-                <span className="price-label">Valor</span>
-                <span className="modal-price">{formattedPrice}</span>
-              </div>
+              <ProductPrice
+                price={product.price}
+                promotionalPrice={product.promotionalPrice}
+                label="Valor"
+                tone="featured"
+                className="modal-price-container"
+              />
               
               <a 
                 href={whatsappLink} 

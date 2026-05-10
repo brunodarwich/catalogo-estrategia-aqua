@@ -1,39 +1,40 @@
-import React from 'react';
 import { MessageCircle } from 'lucide-react';
+import { getCategoryById, getProductPrimaryImage } from '../data/catalog';
+import ProductPrice from './ProductPrice';
 import './ProductCard.css';
 
 const ProductCard = ({ product, onClick }) => {
-  // Formatação de preço
-  const formattedPrice = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(product.price);
+  const primaryImage = getProductPrimaryImage(product);
+  const category = getCategoryById(product.categoryId);
 
   return (
-    <article className="product-card" onClick={onClick}>
+    <article className="product-card">
       <div className="product-image-container">
         <img 
-          src={product.images[0]} 
+          src={primaryImage}
           alt={product.name} 
           className="product-image" 
           loading="lazy"
         />
-        {product.inspiration && (
-          <span className="product-inspiration-tag">Insp: {product.inspiration}</span>
+        {product.fragrance && (
+          <span className="product-inspiration-tag">Fragrância: {product.fragrance}</span>
         )}
       </div>
       
       <div className="product-info">
         <div className="product-header">
-          <span className="product-sku">Cód. {product.sku}</span>
+          <div className="product-meta">
+            {category && <span className="product-category">{category.name}</span>}
+            <span className="product-sku">Cód. {product.sku}</span>
+          </div>
           <h3 className="product-name">{product.name}</h3>
         </div>
         
-        <p className="product-notes">{product.notes}</p>
+        <p className="product-notes">{product.shortDescription}</p>
         
         <div className="product-footer">
-          <span className="product-price">{formattedPrice}</span>
-          <button className="product-action-btn">
+          <ProductPrice price={product.price} promotionalPrice={product.promotionalPrice} />
+          <button type="button" className="product-action-btn" onClick={onClick}>
             <MessageCircle size={18} strokeWidth={1.5} />
             <span>Ver Detalhes</span>
           </button>

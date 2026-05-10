@@ -1,17 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Cores - Quiet Luxury */
-  --color-primary: #4B3621;   /* Marrom Cafezal */
-  --color-bg-main: #FFFDD0;   /* Creme Suave */
-  --color-bg-alt: #F5F5DC;    /* Bege Clássico */
-  --color-accent: #D4AF37;    /* Ouro Velho */
-  --color-text: #6F4E37;      /* Texto Secundário */
-  --color-white: #FAF9F6;     /* Off-White */
+  /* AQUA MVP tokens */
+  --color-deep-charcoal: #111315;
+  --color-soft-black: #1A1D21;
+  --color-warm-ivory: #F4F0EA;
+  --color-mist-beige: #D8CFC3;
+  --color-aqua-gold: #C9A86A;
+  --color-soft-aqua: #7FBFC7;
+
+  /* Legacy aliases used by current components */
+  --color-primary: var(--color-deep-charcoal);
+  --color-bg-main: var(--color-deep-charcoal);
+  --color-bg-alt: var(--color-soft-black);
+  --color-accent: var(--color-aqua-gold);
+  --color-text: var(--color-mist-beige);
+  --color-white: var(--color-warm-ivory);
   
-  /* Tipografia */
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Montserrat', sans-serif;
+  /* Typography */
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Inter', sans-serif;
   
   /* Espaçamento */
   --spacing-gap: 1.5rem;
@@ -30,7 +38,7 @@
 body {
   font-family: var(--font-sans);
   background-color: var(--color-bg-main);
-  color: var(--color-primary);
+  color: var(--color-white);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

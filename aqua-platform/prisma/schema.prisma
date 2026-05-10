@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  operational
+  strategic
+}
+
+enum AdminStatus {
+  active
+  inactive
+}
+
+enum ProductStatus {
+  active
+  inactive
+  draft
+}
+
+enum SaleStatus {
+  pending
+  completed
+  cancelled
+}
+
+enum EventType {
+  page_view
+  product_view
+  category_view
+  whatsapp_click
+  promotion_click
+  reseller_cta_click
+}
+
+model AdminUser {
+  id        String      @id @default(cuid())
+  email     String      @unique
+  name      String?
+  role      Role        @default(operational)
+  status    AdminStatus @default(active)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@map("admin_users")
+}
+
+model Category {
+  id           String    @id
+  name         String
+  slug         String    @unique
+  description  String?
+  displayOrder Int       @default(0)
+  isActive     Boolean   @default(true)
+  products     Product[]
+  events       Event[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model Product {
+  id                String        @id
+  sku               String        @unique
+  slug              String        @unique
+  categoryId        String
+  name              String
+  shortDescription  String?
+  description       String?
+  price             Decimal       @db.Decimal(10, 2)
+  promotionalPrice  Decimal?      @db.Decimal(10, 2)
+  images            String[]      @default([])
+  fragrance         String?
+  volume            String?
+  status            ProductStatus @default(draft)
+  isFeatured        Boolean       @default(false)
+  isPromotion       Boolean       @default(false)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  sales    Sale[]
+  events   Event[]
+
+  @@index([categoryId])
+  @@index([status])
+  @@map("products")
+}
+
+model Sale {
+  id           String     @id @default(cuid())
+  productId    String?
+  customerName String?
+  channel      String?
+  status       SaleStatus @default(pending)
+  quantity     Int        @default(1)
+  unitPrice    Decimal    @db.Decimal(10, 2)
+  total         Decimal    @db.Decimal(10, 2)
+  notes        String?
+  soldAt       DateTime   @default(now())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([soldAt])
+  @@map("sales")
+}
+
+model Event {
+  id         String    @id @default(cuid())
+  type       EventType
+  productId  String?
+  categoryId String?
+  path       String?
+  referrer   String?
+  source     String?
+  metadata   Json?
+  occurredAt DateTime  @default(now())
+
+  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  @@index([type])
+  @@index([productId])
+  @@index([categoryId])
+  @@index([occurredAt])
+  @@map("events")
+}
+
+model StoreSetting {
+  key       String   @id
+  value     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("store_settings")
+}

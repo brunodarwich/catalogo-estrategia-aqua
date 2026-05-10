@@ -1,0 +1,40 @@
+.highlight-section {
+  padding: 5rem 0;
+}
+
+.highlight-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.highlight-item {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .highlight-section {
+    padding: 3rem 0;
+  }
+
+  .highlight-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlight-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,62 @@
+.section-header {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 42rem;
+}
+
+.section-header--center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-header-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid rgba(201, 168, 106, 0.28);
+  border-radius: 999px;
+  background: rgba(201, 168, 106, 0.08);
+  color: var(--color-aqua-gold);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+}
+
+.section-header-title {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  color: var(--color-white);
+  text-wrap: balance;
+}
+
+.section-header-description {
+  color: rgba(216, 207, 195, 0.92);
+  font-size: 1rem;
+  line-height: 1.85;
+  max-width: 38rem;
+}
+
+.section-header--center .section-header-eyebrow {
+  margin: 0 auto;
+}
+
+.section-header--center .section-header-description {
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    gap: 0.7rem;
+  }
+
+  .section-header-title {
+    font-size: clamp(1.8rem, 10vw, 2.6rem);
+  }
+
+  .section-header-description {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+}

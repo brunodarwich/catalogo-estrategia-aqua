@@ -56,3 +56,10 @@
     *   Criado repositório no GitHub: `https://github.com/brunodarwich/catalogo-estrategia-aqua`.
     *   Push realizado com sucesso para a branch `master`.
     *   Documentação e README atualizados para o padrão institucional e sanitizado.
+
+## [2026-05-09] - Refatoração e Melhorias de UI
+
+- **Refatoração de Componentes:** Criação de novos componentes de UI (`CategorySection`, `EmptyState`, `HighlightRow`, `ProductPrice`, `SectionHeader`) para melhor modularização e escalabilidade.
+- **Atualização da Estrutura de Documentação:** Reorganização da pasta `docs/` com a adição de novos artefatos de planejamento (`business-model-canvas.md`, `value-proposition-canvas.md`, `prd-mvp.md`, `spec-mvp.md`) e remoção de documentos legados (`PRD.md`, `TechnicalSpec.md`).
+- **Painel Administrativo:** Inicialização da estrutura do módulo de administração (`src/admin/`).
+- **Configuração e Dados:** Ajustes em configurações (`vite.config.js`, `eslint.config.js`, `.gitignore`) e atualização da estrutura de dados do catálogo (`src/data/catalog.js`).

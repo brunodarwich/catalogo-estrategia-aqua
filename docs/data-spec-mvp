@@ -1,0 +1,12 @@
+Criei o **Data Spec do MVP da AQUA** com:
+
+* entidades principais,
+* tabelas,
+* campos,
+* status,
+* eventos,
+* métricas,
+* regras de cálculo,
+* permissões de dados,
+* dados fora do MVP,
+* e preparação para evolução futura.

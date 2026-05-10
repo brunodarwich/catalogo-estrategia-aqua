@@ -1,0 +1,39 @@
+.product-price-block {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.product-price-label {
+  font-size: 0.72rem;
+  color: rgba(216, 207, 195, 0.72);
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.product-price-values {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.product-price-original {
+  color: rgba(216, 207, 195, 0.6);
+  font-size: 0.95rem;
+  text-decoration: line-through;
+}
+
+.product-price-current {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.product-price-block--featured .product-price-current {
+  font-size: 1.95rem;
+}
+
+.product-price-block--featured .product-price-original {
+  font-size: 1rem;
+}
