@@ -1,17 +1,71 @@
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import pg from 'pg';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const prisma = new PrismaClient();
+const { Pool } = pg;
+const pool = new Pool({
+  connectionString: process.env.DIRECT_URL || process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const catalogPath = path.resolve(__dirname, '../../src/data/products.json');
+const catalogPaths = [
+  path.resolve(__dirname, './seed-data.json'),
+  path.resolve(__dirname, '../../src/data/products.json'),
+];
+
+const defaultStoreSettings = {
+  name: 'AQUA',
+  whatsappPhone: '',
+  instagramUrl: '',
+  logoUrl: '',
+  hero: {
+    videoSrc: '',
+    posterSrc: '',
+  },
+  institutional: {
+    aboutTitle: 'Sobre a AQUA',
+    aboutText: '',
+  },
+  legal: {
+    privacyPolicy: '',
+    termsOfUse: '',
+  },
+};
 
 const parseEmailList = (value = '') =>
   value
     .split(',')
     .map((email) => email.trim().toLowerCase())
     .filter(Boolean);
+
+function loadCatalog() {
+  const catalogPath = catalogPaths.find((candidate) => fs.existsSync(candidate));
+
+  if (!catalogPath) {
+    return {
+      categories: [],
+      products: [],
+      store: defaultStoreSettings,
+      source: null,
+    };
+  }
+
+  const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+
+  return {
+    categories: Array.isArray(catalog.categories) ? catalog.categories : [],
+    products: Array.isArray(catalog.products) ? catalog.products : [],
+    store: catalog.store && typeof catalog.store === 'object'
+      ? { ...defaultStoreSettings, ...catalog.store }
+      : defaultStoreSettings,
+    source: catalogPath,
+  };
+}
 
 async function seedAdmins() {
   const strategicEmails = parseEmailList(process.env.AQUA_INITIAL_STRATEGIC_EMAILS);
@@ -35,7 +89,7 @@ async function seedAdmins() {
 }
 
 async function main() {
-  const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+  const catalog = loadCatalog();
 
   for (const category of catalog.categories) {
     await prisma.category.upsert({
@@ -60,6 +114,12 @@ async function main() {
   });
 
   await seedAdmins();
+
+  if (catalog.source) {
+    console.log(`Seed concluido com dados de ${catalog.source}`);
+  } else {
+    console.log('Seed concluido com configuracao padrao da loja e usuarios admins.');
+  }
 }
 
 main()

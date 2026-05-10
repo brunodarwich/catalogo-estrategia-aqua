@@ -142,7 +142,7 @@ function PublicSite() {
               className="social-link"
             >
               <ExternalLink size={20} strokeWidth={1.5} />
-              <span>@aqua.perfumaria</span>
+              <span>@aqua.aromaofficial</span>
             </a>
             <a
               href={generalWhatsAppLink}

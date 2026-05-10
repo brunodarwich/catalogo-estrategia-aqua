@@ -25,6 +25,10 @@ export default function LoginForm() {
     <>
       {error === 'unauthorized' ? (
         <p className="error-text">Seu Google entrou corretamente, mas este e-mail não está autorizado.</p>
+      ) : error === 'oauth_failed' ? (
+        <p className="error-text">
+          Não foi possível concluir o login com Google. Revise o Client ID, o Client Secret e o callback no Google Cloud e no Supabase.
+        </p>
       ) : null}
       <button className="button" type="button" onClick={handleLogin}>
         <LogIn size={18} />

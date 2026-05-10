@@ -1,15 +1,14 @@
-import { storeSettings } from '../data/catalog';
+import { storeSettings } from '../data/catalog.js';
+import { getProductMessageTemplate } from './whatsapp-template.js';
 
 const getPhone = () =>
-  import.meta.env.VITE_WHATSAPP_PHONE || storeSettings.whatsappPhone;
+  import.meta.env?.VITE_WHATSAPP_PHONE || storeSettings.whatsappPhone;
 
 export const generateWhatsAppLink = (product) => {
   if (!product) return '';
 
   const phone = getPhone();
-  const messageTemplate =
-    import.meta.env.VITE_WHATSAPP_MESSAGE ||
-    'Olá! Gostaria de encomendar o {productName} (Cód. {productSku}).';
+  const messageTemplate = getProductMessageTemplate(import.meta.env?.VITE_WHATSAPP_MESSAGE);
 
   const message = messageTemplate
     .replace('{productName}', product.name)

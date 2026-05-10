@@ -1,19 +1,42 @@
-import Link from 'next/link';
+import { getPrisma } from '@/lib/prisma';
+import PublicCatalog from '@/components/public-catalog';
 
-export default function HomePage() {
+export const dynamic = 'force-dynamic';
+
+const getStore = (value) => (value && typeof value === 'object' ? value : {});
+
+export default async function HomePage({ searchParams }) {
+  void searchParams;
+  const prisma = getPrisma();
+  const [setting, categories, products] = await Promise.all([
+    prisma.storeSetting.findUnique({ where: { key: 'store' } }),
+    prisma.category.findMany({
+      where: { isActive: true },
+      orderBy: [{ displayOrder: 'asc' }, { name: 'asc' }],
+    }),
+    prisma.product.findMany({
+      where: {
+        status: 'active',
+        category: { isActive: true },
+      },
+      include: {
+        category: true,
+      },
+      orderBy: [{ isFeatured: 'desc' }, { isPromotion: 'desc' }, { name: 'asc' }],
+    }),
+  ]);
+
+  const serializedProducts = products.map((product) => ({
+    ...product,
+    price: Number(product.price),
+    promotionalPrice: product.promotionalPrice ? Number(product.promotionalPrice) : null,
+  }));
+
   return (
-    <main className="home-page">
-      <section className="home-panel">
-        <span className="eyebrow">AQUA Platform</span>
-        <h1>Base backend preparada</h1>
-        <p className="muted">
-          Esta aplicação concentra a próxima fase da AQUA: autenticação, permissões,
-          persistência e painel protegido.
-        </p>
-        <Link className="button" href="/admin">
-          Acessar painel
-        </Link>
-      </section>
-    </main>
+    <PublicCatalog
+      categories={categories}
+      products={serializedProducts}
+      store={getStore(setting?.value)}
+    />
   );
 }

@@ -4,6 +4,14 @@ import { revalidatePath } from 'next/cache';
 import { getPrisma } from '@/lib/prisma';
 import { requireAdminUser } from '@/lib/admin-auth';
 import { slugify } from '@/lib/format';
+import {
+  getCategoryPayload,
+  getMutationErrorMessage,
+  getProductPayload,
+  getRequiredString,
+  getSalePayload,
+  getString,
+} from '@/lib/action-validation';
 
 const eventTypes = new Set([
   'page_view',
@@ -14,104 +22,34 @@ const eventTypes = new Set([
   'reseller_cta_click',
 ]);
 
-const saleStatuses = new Set(['pending', 'completed', 'cancelled']);
-const productStatuses = new Set(['active', 'inactive', 'draft']);
-
-const getString = (formData, key) => String(formData.get(key) || '').trim();
-
-const getNumber = (formData, key, fallback = 0) => {
-  const value = Number(formData.get(key));
-  return Number.isFinite(value) ? value : fallback;
-};
-
-const parseOptionalNumber = (formData, key) => {
-  const raw = getString(formData, key);
-  if (!raw) return null;
-
-  const value = Number(raw);
-  return Number.isFinite(value) ? value : null;
-};
-
-const parseImageList = (formData, key) =>
-  getString(formData, key)
-    .split(/\r?\n|,/)
-    .map((item) => item.trim())
-    .filter(Boolean);
-
-const getProductStatus = (formData) => {
-  const status = getString(formData, 'status');
-  return productStatuses.has(status) ? status : 'draft';
-};
-
-const getProductPayload = (formData) => {
-  const name = getString(formData, 'name');
-  const slug = slugify(getString(formData, 'slug') || name);
-  const sku = getString(formData, 'sku').toUpperCase();
-  const promotionalPrice = parseOptionalNumber(formData, 'promotionalPrice');
-
-  return {
-    name,
-    slug,
-    sku,
-    categoryId: getString(formData, 'categoryId'),
-    shortDescription: getString(formData, 'shortDescription') || null,
-    description: getString(formData, 'description') || null,
-    price: Math.max(0, getNumber(formData, 'price')),
-    promotionalPrice: promotionalPrice && promotionalPrice > 0 ? promotionalPrice : null,
-    images: parseImageList(formData, 'images'),
-    fragrance: getString(formData, 'fragrance') || null,
-    volume: getString(formData, 'volume') || null,
-    status: getProductStatus(formData),
-    isFeatured: formData.get('isFeatured') === 'on',
-    isPromotion: formData.get('isPromotion') === 'on',
-  };
-};
-
 export async function createSale(formData) {
   await requireAdminUser();
   const prisma = getPrisma();
-  const productId = getString(formData, 'productId') || null;
-  const quantity = Math.max(1, Math.trunc(getNumber(formData, 'quantity', 1)));
-  const unitPrice = getNumber(formData, 'unitPrice');
-  const total = quantity * unitPrice;
+  const payload = getSalePayload(formData);
 
-  await prisma.sale.create({
-    data: {
-      productId,
-      customerName: getString(formData, 'customerName') || null,
-      channel: getString(formData, 'channel') || null,
-      status: saleStatuses.has(getString(formData, 'status')) ? getString(formData, 'status') : 'pending',
-      quantity,
-      unitPrice,
-      total,
-      notes: getString(formData, 'notes') || null,
-    },
-  });
+  try {
+    await prisma.sale.create({ data: payload });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel criar a venda.'));
+  }
 
   revalidatePath('/admin');
   revalidatePath('/admin/sales');
+  revalidatePath('/');
 }
 
 export async function updateSale(formData) {
   await requireAdminUser();
-  const id = getString(formData, 'id');
-  const quantity = Math.max(1, Math.trunc(getNumber(formData, 'quantity', 1)));
-  const unitPrice = getNumber(formData, 'unitPrice');
-  const total = quantity * unitPrice;
-  const status = getString(formData, 'status');
+  const { id, ...payload } = getSalePayload(formData, { requireId: true });
 
-  await getPrisma().sale.update({
-    where: { id },
-    data: {
-      customerName: getString(formData, 'customerName') || null,
-      channel: getString(formData, 'channel') || null,
-      status: saleStatuses.has(status) ? status : 'pending',
-      quantity,
-      unitPrice,
-      total,
-      notes: getString(formData, 'notes') || null,
-    },
-  });
+  try {
+    await getPrisma().sale.update({
+      where: { id },
+      data: payload,
+    });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel atualizar a venda.'));
+  }
 
   revalidatePath('/admin');
   revalidatePath('/admin/sales');
@@ -120,10 +58,14 @@ export async function updateSale(formData) {
 export async function cancelSale(formData) {
   await requireAdminUser();
 
-  await getPrisma().sale.update({
-    where: { id: getString(formData, 'id') },
-    data: { status: 'cancelled' },
-  });
+  try {
+    await getPrisma().sale.update({
+      where: { id: getRequiredString(formData, 'id', 'Venda') },
+      data: { status: 'cancelled' },
+    });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel cancelar a venda.'));
+  }
 
   revalidatePath('/admin');
   revalidatePath('/admin/sales');
@@ -131,99 +73,117 @@ export async function cancelSale(formData) {
 
 export async function createCategory(formData) {
   await requireAdminUser({ strategicOnly: true });
-  const name = getString(formData, 'name');
-  const slug = slugify(getString(formData, 'slug') || name);
+  const { createId, ...payload } = getCategoryPayload(formData);
 
-  await getPrisma().category.create({
-    data: {
-      id: slug,
-      name,
-      slug,
-      description: getString(formData, 'description') || null,
-      displayOrder: Math.trunc(getNumber(formData, 'displayOrder')),
-      isActive: formData.get('isActive') === 'on',
-    },
-  });
+  try {
+    await getPrisma().category.create({
+      data: {
+        id: createId,
+        ...payload,
+      },
+    });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel criar a categoria.'));
+  }
 
   revalidatePath('/admin/categories');
+  revalidatePath('/');
 }
 
 export async function updateCategory(formData) {
   await requireAdminUser({ strategicOnly: true });
-  const id = getString(formData, 'id');
-  const name = getString(formData, 'name');
-  const slug = slugify(getString(formData, 'slug') || name);
+  const { id, createId, ...payload } = getCategoryPayload(formData, { requireId: true });
+  void createId;
 
-  await getPrisma().category.update({
-    where: { id },
-    data: {
-      name,
-      slug,
-      description: getString(formData, 'description') || null,
-      displayOrder: Math.trunc(getNumber(formData, 'displayOrder')),
-      isActive: formData.get('isActive') === 'on',
-    },
-  });
+  try {
+    await getPrisma().category.update({
+      where: { id },
+      data: payload,
+    });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel atualizar a categoria.'));
+  }
 
   revalidatePath('/admin');
   revalidatePath('/admin/categories');
+  revalidatePath('/');
 }
 
 export async function inactivateCategory(formData) {
   await requireAdminUser({ strategicOnly: true });
 
-  await getPrisma().category.update({
-    where: { id: getString(formData, 'id') },
-    data: { isActive: false },
-  });
+  try {
+    await getPrisma().category.update({
+      where: { id: getRequiredString(formData, 'id', 'Categoria') },
+      data: { isActive: false },
+    });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel inativar a categoria.'));
+  }
 
   revalidatePath('/admin');
   revalidatePath('/admin/categories');
+  revalidatePath('/');
 }
 
 export async function createProduct(formData) {
   await requireAdminUser({ strategicOnly: true });
   const payload = getProductPayload(formData);
 
-  await getPrisma().product.create({
-    data: {
-      id: slugify(getString(formData, 'id') || payload.slug || payload.sku),
-      ...payload,
-    },
-  });
+  try {
+    await getPrisma().product.create({
+      data: {
+        id: slugify(getString(formData, 'id') || payload.slug || payload.sku),
+        ...payload,
+      },
+    });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel criar o produto.'));
+  }
 
   revalidatePath('/admin');
   revalidatePath('/admin/products');
   revalidatePath('/admin/sales');
   revalidatePath('/admin/analytics');
+  revalidatePath('/');
 }
 
 export async function updateProduct(formData) {
   await requireAdminUser({ strategicOnly: true });
 
-  await getPrisma().product.update({
-    where: { id: getString(formData, 'id') },
-    data: getProductPayload(formData),
-  });
+  try {
+    await getPrisma().product.update({
+      where: { id: getRequiredString(formData, 'id', 'Produto') },
+      data: getProductPayload(formData),
+    });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel atualizar o produto.'));
+  }
 
   revalidatePath('/admin');
   revalidatePath('/admin/products');
   revalidatePath('/admin/sales');
   revalidatePath('/admin/analytics');
+  revalidatePath('/');
 }
 
 export async function inactivateProduct(formData) {
   await requireAdminUser({ strategicOnly: true });
 
-  await getPrisma().product.update({
-    where: { id: getString(formData, 'id') },
-    data: { status: 'inactive', isFeatured: false, isPromotion: false },
-  });
+  try {
+    await getPrisma().product.update({
+      where: { id: getRequiredString(formData, 'id', 'Produto') },
+      data: { status: 'inactive', isFeatured: false, isPromotion: false },
+    });
+  } catch (error) {
+    throw new Error(getMutationErrorMessage(error, 'Nao foi possivel inativar o produto.'));
+  }
 
   revalidatePath('/admin');
   revalidatePath('/admin/products');
   revalidatePath('/admin/sales');
   revalidatePath('/admin/analytics');
+  revalidatePath('/');
 }
 
 export async function updateStoreSettings(formData) {
@@ -255,6 +215,7 @@ export async function updateStoreSettings(formData) {
   });
 
   revalidatePath('/admin/settings');
+  revalidatePath('/');
 }
 
 export async function recordInternalEvent(formData) {

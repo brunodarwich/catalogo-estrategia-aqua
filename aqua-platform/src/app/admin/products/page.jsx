@@ -1,5 +1,6 @@
 import { createProduct, inactivateProduct, updateProduct } from '../actions';
 import { requireAdminUser } from '@/lib/admin-auth';
+import ProductImagesField from '@/components/product-images-field';
 import { formatCurrency } from '@/lib/format';
 import { getPrisma } from '@/lib/prisma';
 
@@ -135,14 +136,7 @@ export default async function AdminProductsPage() {
               <textarea name="description" rows="4" />
             </label>
 
-            <label>
-              Imagens
-              <textarea
-                name="images"
-                rows="3"
-                placeholder="Uma URL por linha ou separadas por vírgula"
-              />
-            </label>
+            <ProductImagesField />
 
             <div className="form-row form-row--checks">
               <label className="check-label">
@@ -270,10 +264,10 @@ export default async function AdminProductsPage() {
                   <textarea name="description" rows="3" defaultValue={product.description || ''} />
                 </label>
 
-                <label>
-                  Imagens
-                  <textarea name="images" rows="2" defaultValue={product.images.join('\n')} />
-                </label>
+                <ProductImagesField
+                  defaultValue={product.images.join('\n')}
+                  productRef={product.id}
+                />
 
                 <div className="form-row form-row--checks">
                   <label className="check-label">

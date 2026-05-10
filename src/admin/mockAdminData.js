@@ -1,6 +1,6 @@
 export const mockAdminUser = {
-  name: 'Bruno Darwich',
-  email: 'estrategia@aqua.local',
+  name: 'Administrador AQUA',
+  email: 'admin@aqua.local',
   role: 'strategic',
   status: 'active',
 };

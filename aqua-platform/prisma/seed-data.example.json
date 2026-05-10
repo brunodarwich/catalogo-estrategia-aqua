@@ -1,0 +1,51 @@
+{
+  "store": {
+    "name": "AQUA",
+    "whatsappPhone": "5588999999999",
+    "instagramUrl": "https://www.instagram.com/aqua.aromaofficial/",
+    "logoUrl": "/logo.svg",
+    "hero": {
+      "videoSrc": "/videos/hero.mp4",
+      "posterSrc": "/images/hero-poster.jpg"
+    },
+    "institutional": {
+      "aboutTitle": "Sobre a AQUA",
+      "aboutText": "Texto institucional da marca."
+    },
+    "legal": {
+      "privacyPolicy": "Sua politica de privacidade.",
+      "termsOfUse": "Seus termos de uso."
+    }
+  },
+  "categories": [
+    {
+      "id": "perfumaria",
+      "name": "Perfumaria",
+      "slug": "perfumaria",
+      "description": "Linha principal da marca.",
+      "displayOrder": 0,
+      "isActive": true
+    }
+  ],
+  "products": [
+    {
+      "id": "perfume-aqua-001",
+      "sku": "AQUA-001",
+      "slug": "perfume-aqua-001",
+      "categoryId": "perfumaria",
+      "name": "Perfume AQUA 001",
+      "shortDescription": "Descricao curta",
+      "description": "Descricao completa",
+      "price": 199.9,
+      "promotionalPrice": 179.9,
+      "images": [
+        "/images/produto-1.jpg"
+      ],
+      "fragrance": "Notas citricas e amadeiradas",
+      "volume": "100ml",
+      "status": "active",
+      "isFeatured": true,
+      "isPromotion": true
+    }
+  ]
+}

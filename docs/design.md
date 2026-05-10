@@ -1,560 +1,198 @@
-# design.md
-# AQUA — MVP Design System & UX Direction
+# AQUA — Design Oficial da Vitrine e Plataforma
 
-Versão: 0.1  
-Status: MVP Design Direction
+Versao: 1.0  
+Status: Diretriz visual oficial  
+Data: 2026-05-10
 
----
+## 1. Diretriz Visual Oficial
 
-# 1. Objetivo
+O catalogo Vite antigo e a referencia principal da vitrine publica final. Ele nao deve ser tratado como inspiracao solta, moodboard ou ponto de partida descartavel. A nova vitrine em Next.js deve preservar sua identidade com alta fidelidade.
 
-Este documento define:
+A AQUA deve continuar transmitindo sofisticacao, sensorialidade, leveza, elegancia, modernidade silenciosa e percepcao premium.
 
-- direção visual,
-- UX,
-- comportamento da interface,
-- componentes,
-- estrutura visual,
-- motion,
-- responsividade,
-- e experiência geral do MVP da AQUA.
+A vitrine publica nao deve parecer:
 
-O objetivo é garantir consistência visual e alinhamento entre:
-- branding,
-- frontend,
-- experiência premium,
-- e operação simplificada.
+- dashboard;
+- ERP;
+- ecommerce generico;
+- template pronto;
+- tela administrativa simples;
+- pagina tecnica criada apenas para provar conexao com banco.
 
----
+## 2. Principios de UX
 
-# 2. Conceito Visual da Marca
+- A vitrine deve vender por atmosfera, desejo e clareza.
+- A navegacao deve ser simples, com poucos caminhos e CTAs objetivos.
+- O mobile deve ser tratado como experiencia principal.
+- O usuario deve entender rapidamente categorias, destaques, promocoes e contato.
+- A conversao principal e o WhatsApp.
+- O painel administrativo pode ser mais funcional, mas nao deve abandonar a identidade premium.
 
-A AQUA deve transmitir:
+## 3. Qualidades do Catalogo Antigo a Preservar
 
-- sofisticação,
-- sensorialidade,
-- leveza,
-- bem-estar,
-- elegância,
-- experiência premium,
-- modernidade silenciosa.
+O catalogo Vite antigo tem valor por:
 
-A interface NÃO deve parecer:
-- ERP,
-- dashboard empresarial comum,
-- ecommerce genérico,
-- template pronto,
-- sistema técnico pesado.
+- hero cinematografico com imagem/video forte;
+- fundo escuro sofisticado;
+- contraste elegante entre ivory, dourado e aqua;
+- sensacao editorial;
+- cards de produto com foco em imagem e respiro;
+- filtros discretos;
+- destaques e promocoes em secoes proprias;
+- modal de produto com CTA direto;
+- secoes institucionais enxutas;
+- linguagem visual sensorial, sem excesso de texto.
 
----
+Essas qualidades devem ser mantidas mesmo que a implementacao mude para Next.js, Server Components, Prisma e dados dinamicos.
 
-# 3. Direção Estética
+## 4. Definicao de Alta Fidelidade
 
-A estética deve combinar:
+Alta fidelidade significa que uma pessoa que conhece o catalogo antigo deve reconhecer a nova vitrine como a mesma experiencia evoluida, nao como outro produto.
 
-- luxo minimalista,
-- design editorial,
-- cinematografia,
-- interfaces modernas,
-- superfícies escuras,
-- contraste elegante,
-- iluminação suave,
-- motion discreto.
+Na pratica, isso exige preservar:
 
----
+- sensacao premium e cinematografica;
+- hierarquia visual;
+- ritmo de scroll;
+- atmosfera escura;
+- uso contido de dourado e aqua;
+- tipografia editorial nos titulos;
+- imagens grandes e desejaveis;
+- cards elegantes;
+- filtros e CTAs discretos;
+- experiencia mobile confortavel.
 
-# 4. Sensação da Interface
+Alta fidelidade nao exige copiar cada linha de CSS literalmente. Exige manter percepcao, comportamento, composicao e identidade.
 
-A interface deve parecer:
+## 5. Partes Obrigatorias do Layout Publico
 
-- premium,
-- limpa,
-- confortável,
-- silenciosa,
-- sofisticada,
-- moderna,
-- leve.
+A vitrine final deve manter ou adaptar com grande proximidade:
 
----
+- hero com poster/video, overlay escuro, headline curta, subtitulo e CTAs;
+- secao de categorias ativas;
+- secao de produtos em destaque;
+- secao de promocoes;
+- catalogo filtravel por categoria;
+- cards com imagem, nome, categoria, preco, promocao/destaque e acao;
+- modal ou detalhe de produto com CTA WhatsApp contextual;
+- secao de revendedores;
+- secao "Sobre a AQUA";
+- secao social;
+- footer com links, contato e conteudo legal.
 
-# 5. Paleta de Cores
+## 6. Adaptacao ao Novo Stack
 
-# Base Escura
+A migracao para Next.js deve alterar a base tecnica, nao a identidade da experiencia.
 
-## Deep Charcoal
-HEX: #111315
+Diretrizes:
 
-Uso:
-- fundo principal,
-- hero,
-- dashboard.
+- portar a estrutura visual do Vite como base inicial;
+- substituir dados locais por queries server-side ao banco;
+- preservar classes, tokens e composicoes quando isso acelerar fidelidade;
+- refatorar componentes apenas depois que a experiencia estiver visualmente validada;
+- manter o admin separado visualmente da vitrine, mas dentro da mesma identidade de marca.
 
----
+## 7. Comportamento Desktop e Mobile
 
-## Soft Black
-HEX: #1A1D21
+### Desktop
 
-Uso:
-- cards,
-- navbar,
-- superfícies.
+- Hero deve ter presenca forte na primeira dobra.
+- Secoes devem ter respiro e hierarquia clara.
+- Cards podem formar grid amplo, com imagens dominantes.
+- Filtros devem ser acessiveis e discretos.
+- CTA WhatsApp deve ser visivel sem competir com a experiencia visual.
 
----
+### Mobile
 
-# Tons Claros
+- Imagens devem continuar grandes e legiveis.
+- Scroll deve ser fluido e confortavel.
+- Filtros devem quebrar linha sem apertar texto.
+- Cards devem evitar excesso de informacao.
+- CTAs devem ter area de toque adequada.
+- Modal/detalhe deve ocupar bem a tela sem sobrepor conteudo de forma confusa.
 
-## Warm Ivory
-HEX: #F4F0EA
+## 8. Tom de Marca
 
-Uso:
-- textos,
-- contraste,
-- áreas claras.
+A comunicacao deve ser:
 
----
+- premium;
+- sensorial;
+- elegante;
+- direta;
+- acolhedora;
+- comercial sem parecer agressiva.
 
-## Mist Beige
-HEX: #D8CFC3
+Evitar jargoes tecnicos, textos longos demais e linguagem fria de sistema.
 
-Uso:
-- equilíbrio visual,
-- fundos suaves,
-- divisões.
+## 9. Hierarquia Visual
 
----
+- Hero comunica marca e promessa.
+- Categorias orientam exploracao.
+- Destaques e promocoes criam desejo.
+- Catalogo permite escolha.
+- Modal/detalhe aprofunda informacao.
+- WhatsApp converte.
+- Institucional reforca confianca.
 
-# Destaques
+## 10. Tipografia
 
-## Aqua Gold
-HEX: #C9A86A
+- Titulos devem manter sensacao editorial, com fonte serifada ou equivalente a diretriz anterior.
+- Textos de interface devem usar fonte limpa e altamente legivel.
+- Titulos em cards e paineis compactos nao devem usar escala de hero.
+- Evitar letter spacing negativo.
+- Evitar textos que estourem botoes, filtros ou cards.
 
-Uso:
-- CTA,
-- destaque premium,
-- hover,
-- detalhes sofisticados.
+## 11. Cores
 
----
+Paleta oficial preservada:
 
-## Soft Aqua
-HEX: #7FBFC7
+- Deep Charcoal: `#111315`;
+- Soft Black: `#1A1D21`;
+- Warm Ivory: `#F4F0EA`;
+- Mist Beige: `#D8CFC3`;
+- Aqua Gold: `#C9A86A`;
+- Soft Aqua: `#7FBFC7`.
 
-Uso:
-- detalhes líquidos,
-- glow,
-- elementos sensoriais.
+Uso recomendado:
 
----
+- fundos escuros como base dominante;
+- ivory/beige para leitura;
+- dourado para CTAs e destaques premium;
+- aqua para detalhes sensoriais e contraste pontual.
 
-# 6. Hierarquia de Cores
+## 12. Hero
 
-## 70%
-Fundos escuros.
+O hero deve ser cinematografico e marcar a identidade no primeiro viewport. Deve usar poster ou video real do universo da marca/produto, com overlay escuro e texto sobre a imagem.
 
-## 20%
-Neutros claros.
+Nao substituir por layout administrativo, card lateral, bloco generico ou fundo puramente decorativo.
 
-## 10%
-Dourado e aqua.
+## 13. Cards, CTAs, Modal e Filtros
 
----
+- Cards devem priorizar imagem, nome, categoria e preco.
+- Promocao e destaque devem ser perceptiveis sem poluir.
+- CTAs devem ser claros, elegantes e consistentes.
+- Filtros devem funcionar como navegacao leve por categoria.
+- Modal/detalhe deve preservar foco no produto e facilitar WhatsApp.
 
-# 7. Tipografia
+## 14. Secoes Institucionais
 
-# Fonte Principal
+Revendedores, sobre, social e footer devem permanecer enxutos, elegantes e comerciais. Essas secoes nao devem virar blocos longos de explicacao institucional.
 
-## Cinzel
+## 15. Regras para Nao Descaracterizar
 
-Uso:
-- títulos,
-- hero,
-- headlines,
-- branding.
+Nao fazer:
 
-Sensação:
-- editorial,
-- elegante,
-- premium.
+- trocar a vitrine por uma lista simples conectada ao banco;
+- usar a home publica atual da `aqua-platform` como experiencia final;
+- remover hero cinematografico;
+- reduzir cards a tabelas ou blocos administrativos;
+- abandonar paleta e tipografia do catalogo antigo;
+- criar uma experiencia generica de loja online;
+- manter Vite em producao como justificativa para preservar visual.
 
----
+Fazer:
 
-# Fonte Secundária
-
-## Inter
-
-Uso:
-- interface,
-- dashboard,
-- textos,
-- inputs,
-- tabelas.
-
-Sensação:
-- limpa,
-- moderna,
-- legível.
-
----
-
-# 8. Direção de UX
-
-# Objetivos principais
-
-- poucos cliques,
-- baixa fricção,
-- simplicidade,
-- clareza visual,
-- conforto operacional,
-- mobile-first.
-
----
-
-# Regras de UX
-
-## Evitar
-- excesso de menus,
-- excesso de texto,
-- excesso de métricas,
-- telas carregadas,
-- tabelas complexas.
-
----
-
-## Priorizar
-- espaçamento,
-- foco visual,
-- leitura rápida,
-- ações objetivas,
-- hierarquia clara.
-
----
-
-# 9. Estrutura Mobile-First
-
-Toda a experiência deve ser pensada primeiro para:
-- celular.
-
-Depois:
-- tablet,
-- desktop.
-
----
-
-# Mobile deve priorizar
-
-- scroll confortável,
-- imagens grandes,
-- CTAs visíveis,
-- leitura rápida,
-- navegação simples.
-
----
-
-# 10. Direção da Homepage
-
-# Hero
-
-Características:
-- vídeo cinematográfico,
-- overlay escuro,
-- logo elegante,
-- texto curto,
-- CTA principal.
-
----
-
-# Categorias
-
-Estrutura:
-- grid visual,
-- imagens grandes,
-- navegação simples.
-
----
-
-# Produtos
-
-Características:
-- cards premium,
-- fotografia sofisticada,
-- pouco texto,
-- foco visual.
-
----
-
-# Promoções
-
-Características:
-- destaque visual,
-- contraste elegante,
-- sensação de oportunidade premium.
-
----
-
-# Revendedores
-
-Características:
-- comunicação objetiva,
-- visual elegante,
-- CTA forte para WhatsApp.
-
----
-
-# Footer
-
-Deve conter:
-- contatos,
-- redes sociais,
-- termos,
-- política de privacidade.
-
----
-
-# 11. Dashboard Operacional
-
-# Objetivo
-
-Ser extremamente simples.
-
-A interface deve responder:
-- o que está acontecendo,
-- o que precisa ser acompanhado,
-- e o essencial da operação.
-
----
-
-# Componentes
-
-## Cards
-- faturamento previsto,
-- vendas,
-- visitas,
-- produtos ativos.
-
----
-
-## Tabelas
-- últimas vendas,
-- últimos produtos.
-
----
-
-# Regras
-
-## Evitar
-- gráficos complexos,
-- excesso de analytics,
-- excesso de filtros.
-
----
-
-# 12. Dashboard Estratégico
-
-# Objetivo
-
-Permitir visão analítica completa.
-
----
-
-# Estrutura
-
-## Analytics
-- origem de tráfego,
-- eventos,
-- CTR,
-- produtos mais vistos,
-- produtos mais clicados.
-
----
-
-## Gestão
-- usuários,
-- permissões,
-- logs,
-- dados completos.
-
----
-
-# 13. Componentes Visuais
-
-# Cards
-
-Características:
-- fundo escuro,
-- blur leve,
-- bordas suaves,
-- glow discreto.
-
----
-
-# Botões
-
-Características:
-- grandes,
-- elegantes,
-- pouco texto,
-- hover suave.
-
----
-
-# Inputs
-
-Características:
-- minimalistas,
-- borda discreta,
-- foco elegante,
-- sem aparência técnica.
-
----
-
-# Navbar
-
-Características:
-- transparente inicialmente,
-- blur ao scroll,
-- elegante,
-- limpa.
-
----
-
-# Sidebar
-
-Características:
-- compacta,
-- organizada,
-- ícones simples,
-- visual premium.
-
----
-
-# 14. Motion Design
-
-# Direção
-
-As animações devem ser:
-- suaves,
-- lentas,
-- elegantes,
-- discretas.
-
----
-
-# Evitar
-
-- exageros,
-- efeitos gamer,
-- transições agressivas,
-- animações rápidas.
-
----
-
-# Motion sugerido
-
-- fade,
-- opacity,
-- blur,
-- slide suave,
-- parallax leve.
-
----
-
-# 15. Estilo Fotográfico
-
-As imagens devem parecer:
-- cinematográficas,
-- sofisticadas,
-- sensoriais,
-- modernas.
-
----
-
-# Características
-
-- iluminação suave,
-- profundidade,
-- contraste elegante,
-- texturas,
-- vidro,
-- tecidos,
-- líquidos,
-- fumaça leve.
-
----
-
-# 16. Ícones
-
-Biblioteca sugerida:
-- Lucide Icons.
-
-Características:
-- finos,
-- minimalistas,
-- modernos.
-
----
-
-# 17. Stack Visual Sugerida
-
-## Frontend
-- Next.js
-
-## Styling
-- TailwindCSS
-
-## Motion
-- Framer Motion
-
-## Icons
-- Lucide
-
----
-
-# 18. Estrutura de Componentes
-
-# Públicos
-
-- HeroSection
-- CategoryGrid
-- ProductGrid
-- ProductCard
-- PromotionBanner
-- ResellerSection
-- Footer
-- Navbar
-
----
-
-# Dashboard
-
-- Sidebar
-- Topbar
-- MetricCard
-- ProductsTable
-- SalesTable
-- AnalyticsChart
-
----
-
-# 19. Direção de Branding
-
-A AQUA deve ser percebida como:
-
-- premium,
-- moderna,
-- elegante,
-- sensorial,
-- sofisticada,
-- emocional.
-
----
-
-# 20. Objetivo Final da Experiência
-
-A experiência visual da AQUA deve:
-
-- gerar desejo,
-- aumentar percepção de valor,
-- transmitir qualidade,
-- fortalecer branding,
-- simplificar operação,
-- e criar conexão emocional com a marca.
+- migrar o visual antigo para o novo stack;
+- validar desktop e mobile contra o catalogo original;
+- priorizar fidelidade antes de refatoracao;
+- tratar o design antigo como patrimonio do projeto.

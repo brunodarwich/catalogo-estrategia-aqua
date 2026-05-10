@@ -10,7 +10,8 @@
       "Bash(cp \"d:\\\\Bruno Darwich\\\\Consultoria e Prestação de Serviços\\\\AQUA\\\\catalogo-estrategia-aqua\\\\src\\\\data\\\\products.json\" \"d:\\\\Bruno Darwich\\\\Consultoria e Prestação de Serviços\\\\AQUA\\\\aqua-platform\\\\src\\\\data\\\\products.json\" && echo \"OK\")",
       "Bash(npx prisma *)",
       "Bash(Get-ChildItem -Recurse -Path \"d:\\\\Bruno Darwich\\\\Consultoria e Prestação de Serviços\\\\AQUA\\\\aqua-platform\\\\src\\\\app\\\\admin\" -File)",
-      "Bash(Select-Object FullName)"
+      "Bash(Select-Object FullName)",
+      "Bash(del \"d:\\\\Bruno Darwich\\\\Consultoria e Prestação de Serviços\\\\AQUA\\\\catalogo-estrategia-aqua\\\\aqua-platform\\\\src\\\\middleware.js\")"
     ],
     "additionalDirectories": [
       "d:\\Bruno Darwich\\Consultoria e Prestação de Serviços\\AQUA\\aqua-platform\\src\\data"

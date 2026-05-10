@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://catalogo-estrategia-aqua.vercel.app/sitemap.xml
